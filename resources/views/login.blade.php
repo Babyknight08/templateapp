@@ -35,7 +35,13 @@
                 @else
                     Guest
                 @endif 
+            </span>
 
+               @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
             <form class="m-t" role="form" method="post" id="loginform" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
