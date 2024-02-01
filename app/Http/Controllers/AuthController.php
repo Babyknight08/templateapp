@@ -28,6 +28,7 @@ class AuthController extends Controller
             session(['id' => $user->id]);
             session(['firstname' => $user->firstname]);
             session(['lastname' => $user->lastname]);
+            session(['jobtitle' => $user->jobtitle]);
     
             return response()->json(['success' => true, 'data' => $data]);
         }

@@ -5,11 +5,13 @@
         <ul class="nav navbar-top-links navbar-right">
             <li>
                 <span class="m-r-sm text-muted welcome-message">Welcome, 
+                <b>
                     @if(session('firstname'))
-                        {{ session('firstname') }}
+                        {{ session('firstname') }}!
                     @else
                         Guest
                     @endif
+                </b>
                 </span>
             </li>
             

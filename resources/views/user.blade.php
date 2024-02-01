@@ -16,6 +16,7 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 <body>
@@ -51,7 +52,7 @@
                 <div class="col-lg-12">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <a data-toggle="modal" class="btn btn-primary" href="#modal-form">+User</a>
+                        <a data-toggle="modal" class="btn btn-primary" href="#createUserModal">+User</a>
                     </div>
                     <div class="ibox-content">
                         <div class="table-responsive">
@@ -87,7 +88,7 @@
 
 
 
-        <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div id="createUserModal" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -107,7 +108,8 @@
                                     </select>
                                     </div>
                                     <div>
-                                        <button class="btn btn-sm btn-primary float-right m-t-n-xs" type="submit"><strong>Log in</strong></button>
+                                        <button type="button" class="btn btn-white float-right" data-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary float-right mr-1" type="submit"><strong>Create</strong></button>
                                     </div>
                                 </form>
                             </div>
@@ -132,6 +134,9 @@
     <script src="js/plugins/pace/pace.min.js"></script>
 
     <!-- Page-Level Scripts -->
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function(){
 
@@ -149,6 +154,7 @@
                     },
                 },
                 order: [0, 'desc'],
+                responsive: true,
                 columns: [
                     { data: 'id' },
                     { data: 'username' },
@@ -159,18 +165,12 @@
                     {
                         data: "id",
                         render: function (data, type, row, meta) {
-                        
                             return `
-                                <button class="btn btn-success btn-sm viewUser" id="${data}">
-                                    View
-                                </button>
-                                <button class="btn btn-primary btn-sm updateUser" id="${data}">
-                                    Edit
-                                </button>
-                                <button class="btn btn-danger btn-sm deleteUser" id="${data}">
-                                    Delete
-                                </button>`;
-                        
+                                <div class="text-center">
+                                    <button class="btn btn-success btn-sm viewUser" id="${data}">View</button>
+                                    <button class="btn btn-primary btn-sm updateUser" id="${data}">Edit</button>
+                                    <button class="btn btn-danger btn-sm deleteUser" id="${data}">Delete</button>
+                                </div>`;
                         }
                     }
                 ],
@@ -201,34 +201,33 @@
             $('#createUserForm').submit(function (e) { 
             e.preventDefault();
             $('#addModal').modal('hide')
-            $.ajax({
-                type: "post",
-                url: "{{ route('user.store') }}",
-                data: $(this).serialize(),
-                dataType: "json",
-                headers: {
-                        'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('user.store') }}",
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    headers: {
+                            'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                        },
+                    success: function (response) {
+                        table.ajax.reload()
+                        swal({
+                            title: "Good Job!",
+                            text: "User Successfully Added!",
+                            type: "success"
+                        });
+                        $('#createUserForm')[0].reset();
+                        $('#createUserModal').modal('hide')
                     },
-                success: function (response) {
-                    table.ajax.reload()
-                    swal({
-                        title: "Good Job!",
-                        text: "User Successfully Added!",
-                        type: "success"
-                    });
-                    $('#createUserForm')[0].reset();
-                },
-                error: function(xhr, status, error){
-                    var responseJSON = xhr.responseJSON;
-                    swal({
-                        title: "Error!",
-                        text: responseJSON.message,
-                        type: "error"
-                    });
-                    $('#createUserForm')[0].reset();
-
-                }
-            });
+                    error: function(xhr, status, error){
+                        var responseJSON = xhr.responseJSON;
+                        swal({
+                            title: "Error!",
+                            text: responseJSON.message,
+                            type: "error"
+                        });        
+                    }
+                });
             });
         });
 

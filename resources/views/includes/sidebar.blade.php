@@ -5,12 +5,19 @@
                 <div class="dropdown profile-element">
                     <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="block m-t-xs font-bold"></span>  @if(session('firstname'))
-                        {{ session('firstname') }}, {{ session('lastname') }}
+                        <span class="block m-t-xs font-bold"></span>  
+                        @if(session('firstname'))
+                        <b>
+                        {{ session('firstname') }} {{ session('lastname') }}</b>
                     @else
                         Guest
                     @endif
-                        <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                        <span class="text-muted text-xs block">  @if(session('firstname'))
+                            <b>
+                            {{ session('jobtitle') }}</b>
+                        @else
+                            Guest
+                        @endif     <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a class="dropdown-item" href="profile.html">Profile</a></li>
