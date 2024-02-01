@@ -24,7 +24,7 @@ class AuthController extends Controller
             return view('dashboard');
         }
     
-        return view('login.index')->with('error', 'Invalid credentials');
+        return view('login');
     
  
     }
