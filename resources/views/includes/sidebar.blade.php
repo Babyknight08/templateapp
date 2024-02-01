@@ -21,7 +21,9 @@
                     </ul>
                 </div>
                 <div class="logo-element">
+                    <a href="{{ route('dashboard') }}">
                     EMB
+                    </a>
                 </div>
             </li>
             <li class="{{ request()->is('/') ? 'active' : '' }}">
@@ -30,7 +32,7 @@
                 </a>
             </li>
             
-            <li class="{{ request()->is('/user') ? 'active' : '' }}">
+            <li class="{{ request()->is('user') ? 'active' : '' }}">
                 <a href="{{ route('user.index') }}">
                     <!-- Adjust the icon and label as needed -->
                     <i class="fa fa-user"></i> <span class="nav-label">User</span>

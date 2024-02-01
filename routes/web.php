@@ -16,21 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Dashboard Route
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
 
+Route::middleware([AuthenticatedMiddleware::class])->group(function () {
 
-// User Routes
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-Route::post('/store', [UserController::class, 'store'])->name('user.store');
-Route::post('/show', [UserController::class, 'show'])->name('user.show');
+    // User Routes
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::post('/store', [UserController::class, 'store'])->name('user.store');
+    Route::post('/show', [UserController::class, 'show'])->name('user.show');
 
-// Logout Route
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Non-Login Route
-Route::get('/login', [AuthController::class, 'index'])->name('login.index');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+    // Logout Route
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     
+    // Non-Login Route
+    Route::get('/login', [AuthController::class, 'index'])->name('login.index');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+    Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
+
+});

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedMiddleware
 {
@@ -17,7 +18,9 @@ class AuthenticatedMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        return $next($request);
+      return $next($request);
 
     }
+    
+        
 }

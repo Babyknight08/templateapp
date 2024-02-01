@@ -12,38 +12,40 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function login(Request $request){
-        $user = $request->only('username', 'password');
-        
-        if(Auth::attempt($user)){
-            $user = Auth::user();
-            
-            // Set user data in the session
-            session(['id' => $user->id, 'firstname' => $user->firstname, 'lastname' => $user->lastname]);
+    public function login(Request $request)
+    {
+
+        $credentials = $request->only('username', 'password');
     
-            // Retrieve the stored data from the session
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+    
             $data = [
-                'success' => 'success',
-                'id' => session('id'),
-                'firstname' => session('firstname'),
-                'lastname' => session('lastname'),
+                'username' => $user->username,
+                'password' => $user->password,
             ];
     
-            return response()->json($data);
+            session(['id' => $user->id]);
+            session(['firstname' => $user->firstname]);
+            session(['lastname' => $user->lastname]);
+    
+            return response()->json(['success' => true, 'data' => $data]);
         }
     
-        return response()->json(['error' => 'No user found']);
-    }
+        $errorMessage = 'Invalid credentials';
     
+        return response()->json(['error' => $errorMessage]);
+    }
 
-
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
- 
         $request->session()->invalidate();
-     
         $request->session()->regenerateToken();
-     
         return redirect()->route('login');
+    }
+
+    public function dashboard(){
+        return view('dashboard');
     }
 }

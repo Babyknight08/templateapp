@@ -111,7 +111,7 @@
 
           
             <li>
-                <a href="{{ route('login') }}">
+                <a href="{{ route('logout') }}">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             </li>

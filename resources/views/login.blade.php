@@ -23,10 +23,9 @@
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
-            <div>
-                <h1 class="logo-name">EMB</h1>
-                
-            </div>
+           
+                <h1 class="logo-name">.</h1>
+             
             <h3>Welcome to EMB Survey</h3>
             <span class="m-r-sm text-muted welcome-message">Welcome, 
                 @if(session('firstname'))
@@ -68,12 +67,13 @@
                 success: function (response) {
                     if (response.success) { 
 
+                        window.location.href = "{{route('dashboard')}}";
                     } else {
-                    //     swal({
-                    //     title: "Error!",
-                    //     text: response.error,
-                    //     type: "error"
-                    // });
+                        swal({
+                        title: "Error!",
+                        text: response.error,
+                        type: "error"
+                    });
                     $('#loginform')[0].reset();
                     }
                 }
