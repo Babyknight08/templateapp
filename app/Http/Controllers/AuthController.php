@@ -23,8 +23,8 @@ class AuthController extends Controller
     
             return view('dashboard');
         }
-    
-        return view('login');
+        session()->flash('error', 'Incorrect Credentials');
+        return view('login')->with('error', 'Incorrect Credentials');
     
  
     }
