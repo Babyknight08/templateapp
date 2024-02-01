@@ -24,13 +24,17 @@ Route::middleware([AuthenticatedMiddleware::class])->group(function () {
     Route::post('/store', [UserController::class, 'store'])->name('user.store');
     Route::post('/show', [UserController::class, 'show'])->name('user.show');
 
-    // Logout Route
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    
-    // Non-Login Route
+    // Non-Login Route default view
     Route::get('/login', [AuthController::class, 'index'])->name('login.index');
+
+    // click login
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+    // default view
     Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
+    // Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 
 });
+
+    // Logout Route
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -3,18 +3,11 @@
         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
     </div>
         <ul class="nav navbar-top-links navbar-right">
+            @if(Auth::check())
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome, 
-                <b>
-                    @if(session('firstname'))
-                        {{ session('firstname') }}!
-                    @else
-                        Guest
-                    @endif
-                </b>
-                </span>
+                <span class="m-r-sm text-muted welcome-message">Welcome, {{ Auth::user()->username }}!</span>
             </li>
-            
+            @endif
             {{-- <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>

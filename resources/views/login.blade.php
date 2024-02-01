@@ -27,14 +27,16 @@
                 <h1 class="logo-name">.</h1>
              
             <h3>Welcome to EMB Survey</h3>
-            <span class="m-r-sm text-muted welcome-message">Welcome, 
-                @if(session('firstname'))
-                    {{ session('firstname') }}
+            <span class="m-r-sm text-muted welcome-message">Welcome 
+                @if(Auth::check())
+                <b>
+                    {{ Auth::user()->firstname }} </b>
+
                 @else
                     Guest
-                @endif
-            </span>
-            <form class="m-t" role="form" method="post" id="loginform">
+                @endif 
+
+            <form class="m-t" role="form" method="post" id="loginform" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Username" required="" name="username">
@@ -56,30 +58,7 @@
     <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 
     {{-- Form Script --}}
-    <script>
-        $('#loginform').submit(function (e) { 
-            e.preventDefault();
-            $.ajax({
-                type: "post",
-                url: "{{ route('login') }}",
-                data: $(this).serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) { 
 
-                        window.location.href = "{{route('dashboard')}}";
-                    } else {
-                        swal({
-                        title: "Error!",
-                        text: response.error,
-                        type: "error"
-                    });
-                    $('#loginform')[0].reset();
-                    }
-                }
-            });
-        });
-    </script>
     
 </body>
 
