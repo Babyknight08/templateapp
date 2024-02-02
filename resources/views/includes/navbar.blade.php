@@ -5,9 +5,14 @@
         <ul class="nav navbar-top-links navbar-right">
             @if(Auth::check())
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome, {{ Auth::user()->username }}!</span>
+                <span class="m-r-sm text-muted welcome-message">Welcome, <b>{{ Auth::user()->firstname }}!</b></span>
             </li>
-            @endif
+        @else
+            <li>
+                You are NOT logged in
+            </li>
+        @endif
+            
             {{-- <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
@@ -106,7 +111,7 @@
 
           
             <li>
-                <a href="{{ route('logout') }}">
+                <a href="{{ route('logout') }}" >
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             </li>

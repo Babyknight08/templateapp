@@ -12,6 +12,8 @@
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
 </head>
 
@@ -33,10 +35,7 @@
                     <h2>Profile</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a>Extra Pages</a>
+                            <a href="{{ route('dashboard') }}">Home</a>
                         </li>
                         <li class="breadcrumb-item active">
                             <strong>Profile</strong>
@@ -60,7 +59,7 @@
                             </div>
                             
                             <div class="ibox-content profile-content">
-                                <h4><strong>Monica Smith</strong></h4>
+                                <h4 id="profilename"><strong></strong></h4>
                                 <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
                                 <h5>
                                     About me
@@ -68,7 +67,7 @@
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
                                 </p>
-                                <div class="row m-t-lg">
+                                {{-- <div class="row m-t-lg">
                                     <div class="col-md-4">
                                         <span class="bar">5,3,9,6,5,9,7,3,5,2</span>
                                         <h5><strong>169</strong> Posts</h5>
@@ -91,7 +90,7 @@
                                             <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                     </div>
                 </div>
@@ -113,19 +112,23 @@
                                                 <form role="form" name="profileform" id="profileform">
                                                 @csrf
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label>First Name</label> <input type="text" placeholder="First Name" class="form-control" name="firstname" id="firstname"></div>
-                                                        <div class="form-group col-md"><label>Last Name</label> <input type="text" placeholder="Last Name" class="form-control" name="lastname" id="lastname"></div>
+                                                        <div class="form-group col-md"><label for="username">Username</label> <input type="text" placeholder="Username" class="form-control" name="username" id="username" autocomplete="off"></div>
+                                                        <div class="form-group col-md"><label for="password">Password</label> <input type="text" placeholder="Password" class="form-control" name="password" id="password"></div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label>Contact No</label> <input type="number" placeholder="Enter Contact No." class="form-control" name="contactno" id="contactno"></div>
-                                                        <div class="form-group col-md"><label>Address</label> <input type="text" placeholder="Enter Address" class="form-control" name="address" id="address"></div>
+                                                        <div class="form-group col-md"><label for="firstname">First Name</label> <input type="text" placeholder="First Name" class="form-control" name="firstname" id="firstname"></div>
+                                                        <div class="form-group col-md"><label for="lastname">Last Name</label> <input type="text" placeholder="Last Name" class="form-control" name="lastname" id="lastname"></div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label>Birth Date</label> <input type="date"  class="form-control" name="birthdate" id="birthdate"></div>
-                                                        <div class="form-group col-md"><label>Birth Place</label> <input type="text" class="form-control" name="birthplace" id="birthplace"></div>
+                                                        <div class="form-group col-md"><label for="contactno">Contact No</label> <input type="number" placeholder="Enter Contact No." class="form-control" name="contactno" id="contactno"></div>
+                                                        <div class="form-group col-md"><label for="address">Address</label> <input type="text" placeholder="Enter Address" class="form-control" name="address" id="address" autocomplete="off"></div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label>Division</label><select class="form-control" name="division" id="division">
+                                                        <div class="form-group col-md"><label for="birthdate">Birth Date</label> <input type="date"  class="form-control" name="birthdate" id="birthdate"></div>
+                                                        <div class="form-group col-md"><label for="birthplace">Birth Place</label> <input type="text" class="form-control" name="birthplace" id="birthplace"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md"><label for="division">Division</label><select class="form-control" name="division" id="division">
                                                             <option value="">Please Select</option>
                                                             <option value="Environmental Monitoring Enforcement Division">Environmental Monitoring Enforcement Division</option>
                                                             <option value="Clearance and Permitting Division">Clearance and Permitting Division</option>
@@ -133,18 +136,17 @@
                                                             <option value="Finance and Administrative Division">Finance and Administrative Division</option>
                                                         </select>
                                                         </div>
-                                                        <div class="form-group col-md"><label>Section</label><select class="form-control" name="section" id="section">
+                                                        <div class="form-group col-md"><label for="section">Section</label><select class="form-control" name="section" id="section">
                                                             <option value="">Please Select</option>
-                                                            <option value="Option 1">Option 1</option>
-                                                            <option value="Option 2">Option 2</option>
-                                                            <option value="Option 3">Option 3</option>
-                                                            <option value="Option 4">Option 4</option>
+                                                            <option value="PISMU">PISMU</option>
+                                                            <option value="EEIU">EEIU</option>
+                                                            <option value="Legal">Legal</option>
                                                         </select>
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label>Job Title</label><select class="form-control" name="jobtitle" id="jobtitle">
+                                                        <div class="form-group col-md"><label for="jobtitle">Job Title</label><select class="form-control" name="jobtitle" id="jobtitle">
                                                             <option value="">Please Select</option>
                                                             <option value="EMS I">EMS I</option>
                                                             <option value="EMS II">EMS II</option>
@@ -156,8 +158,8 @@
 
                                                     <div class="row">
                                                         <div class="form-group col-md">
-                                                            <label for="AboutMe" class="form-label">About Me</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="aboutme" id="aboutme"></textarea>
+                                                            <label for="aboutme" class="form-label">About Me</label>
+                                                            <textarea class="form-control" rows="3" name="aboutme" id="aboutme"></textarea>
                                                         </div>
                                                     </div>
 
@@ -201,12 +203,70 @@
 
     <!-- Peity -->
     <script src="js/demo/peity-demo.js"></script>
+    
+    <!-- Sweet alert -->
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <script>
         $(document).ready(function(){
+            var id = {{ Auth::user()->id }};
+            $.ajax({
+                type: "post",
+                url: "{{ route('profile.show') }}",
+                data: { 
+                    id: id,
+                    _token: "{{ csrf_token() }}"
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Change "token" to "csrf-token"
+                },
+                dataType: "json",
+                success: function (response) {
+                    $("#username").val(response.username);
+                    $("#firstname").val(response.firstname);
+                    $("#lastname").val(response.lastname);
+                    $("#contactno").val(response.contactno);
+                    $("#address").val(response.address);
+                    $("#birthdate").val(response.birthdate);
+                    $("#birthplace").val(response.birthplace);
+                    $("#division").val(response.division);
+                    $("#section").val(response.section);
+                    $("#jobtitle").val(response.jobtitle);
+                    $("#profilename").text(response.firstname + ' ' + response.lastname);
+                },
+                error: function (xhr, status, error) {
+                
+                }
+            });
+
+            $("#profileform").submit(function (e) { 
+                e.preventDefault();
+
+                var formData = {
+                    id: {{ Auth::user()->id }},
+                    username: $("#username").val(),
+                    password: $("#password").val(),
+                    _token: "{{ csrf_token() }}"
+                };
+
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('profile.edit') }}",
+                    data: formData,
+                    dataType: "json",
+                    success: function (response) {
+                        swal({
+                        title: "Success!",
+                        text: "Profile successfully update!",
+                        type: "success"
+                    });
+                    }
+                });
+            });
 
         });
     </script>
+    
 
 </body>
 

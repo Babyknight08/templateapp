@@ -27,15 +27,12 @@
                 <h1 class="logo-name">.</h1>
              
             <h3>Welcome to EMB Survey</h3>
-            <span class="m-r-sm text-muted welcome-message">Welcome 
-                @if(Auth::check())
-                <b>
-                    {{ Auth::user()->firstname }} </b>
-
-                @else
-                    Guest
-                @endif 
-            </span>
+            @if(Auth::check())
+            <p class="text-muted welcome-message"><b>{{ Auth::user()->name }}</b></p>
+            <script>
+                window.location.href = "{{ route('dashboard') }}";
+            </script>
+        @endif 
 
                @if(session('error'))
             <div class="alert alert-danger">

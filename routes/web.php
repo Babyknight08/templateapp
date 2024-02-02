@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthenticatedMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -16,25 +17,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::middleware([AuthenticatedMiddleware::class])->group(function () {
 
-    // User Routes
+    // login
+    Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // user controller
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::post('/store', [UserController::class, 'store'])->name('user.store');
     Route::post('/show', [UserController::class, 'show'])->name('user.show');
 
-    // Non-Login Route default view
-    Route::get('/login', [AuthController::class, 'index'])->name('login.index');
+    // profile controller
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/showprofile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/editprofile', [ProfileController::class, 'edit'])->name('profile.edit');
+
+
+});
+    // User Routes
+
+
 
     // click login
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 
     // default view
-    Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
-    // Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-
-});
-
-    // Logout Route
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/login', [AuthController::class, 'index'])->name('index');

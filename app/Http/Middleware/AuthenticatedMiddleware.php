@@ -15,11 +15,24 @@ class AuthenticatedMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
+        if (Auth::check()) {
+            $user = Auth::user();
+    
+            if ($user->usertype == 1) {
+                return $next($request);
+            } else {
 
-      return $next($request);
-
+                if ($request->is('user')) {
+                    return redirect()->route('dashboard');
+                }
+    
+                return $next($request);
+            }
+        }
+    
+        return redirect()->route('index');
     }
     
         

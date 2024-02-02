@@ -21,10 +21,10 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
     
-            return view('dashboard');
+            return redirect()->route('dashboard');
         }
-        session()->flash('error', 'Incorrect Credentials');
-        return view('login')->with('error', 'Incorrect Credentials');
+        session()->flash('error', 'Invalid Credentials');
+        return redirect()->route('index')->with('error', 'Incorrect Credentials');
     
  
     }
@@ -32,7 +32,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return view('login');
+        return redirect()->route('index');
     }
 
 

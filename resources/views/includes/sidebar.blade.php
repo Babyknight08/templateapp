@@ -18,7 +18,7 @@
                         @endif     <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profile</a></li>
                         <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
                         <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
                         <li class="dropdown-divider"></li>
@@ -37,12 +37,16 @@
                 </a>
             </li>
             
-            <li class="{{ request()->is('user') ? 'active' : '' }}">
-                <a href="{{ route('user.index') }}">
-                    <!-- Adjust the icon and label as needed -->
-                    <i class="fa fa-user"></i> <span class="nav-label">User</span>
-                </a>
-            </li>
+            @auth
+            @if(auth()->user()->usertype == 1)
+                <li class="{{ request()->is('user') ? 'active' : '' }}">
+                    <a href="{{ route('user.index') }}">
+                        <!-- Adjust the icon and label as needed -->
+                        <i class="fa fa-user"></i> <span class="nav-label">User</span>
+                    </a>
+                </li>
+                @endif
+            @endauth
             
             
             {{-- <li class="active">
