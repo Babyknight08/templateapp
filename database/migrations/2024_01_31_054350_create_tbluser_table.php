@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('address');
+            $table->string('contactno');
             $table->string('division');
             $table->string('section');
             $table->string('jobtitle');

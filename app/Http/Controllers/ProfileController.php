@@ -62,21 +62,41 @@ class ProfileController extends Controller
         $id = $request->input('id');
         $username = $request->input('username');
         $password = $request->input('password');
-    
-        $user = User::where('id', $id)->first();
-    
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
+        $address = $request->input('address');
+        $contactno = $request->input('contactno');
+        $division = $request->input('division');
+        $section = $request->input('section');
+        $jobtitle = $request->input('jobtitle');
+   
         if (!empty($password)) {
             User::where('id', $id)
                 ->update([
                     'username' => $username,
                     'password' => bcrypt($password),
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'address' => $address,
+                    'contactno' => $contactno,
+                    'division' => $division,
+                    'section' => $section,
+                    'jobtitle' => $jobtitle,
                 ]);
         } else {
             User::where('id', $id)
-                ->update(['username' => $username]);
+                ->update(['username' => $username,        
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'address' => $address,
+                'contactno' => $contactno,
+                'division' => $division,
+                'section' => $section,
+                'jobtitle' => $jobtitle,]);
         }
     
-        return response()->json(['message' => 'User updated successfully']);
+        return response()->json(['message' => 'Profile Updated Successfully!']);
+     
     }
 
     /**

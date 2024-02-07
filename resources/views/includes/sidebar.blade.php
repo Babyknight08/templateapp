@@ -19,10 +19,10 @@
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profile</a></li>
-                        <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                        <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
+                        {{-- <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
+                        <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li> --}}
                         <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -41,14 +41,24 @@
             @if(auth()->user()->usertype == 1)
                 <li class="{{ request()->is('user') ? 'active' : '' }}">
                     <a href="{{ route('user.index') }}">
-                        <!-- Adjust the icon and label as needed -->
-                        <i class="fa fa-user"></i> <span class="nav-label">User</span>
+                        <i class="fa fa-users"></i> <span class="nav-label">User</span>
                     </a>
                 </li>
                 @endif
             @endauth
+            <li class="{{ request()->is('alltransaction*', 'inbox*') ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-file"></i> <span class="nav-label">Documents</span><span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse {{ request()->is('alltransaction*', 'inbox*') ? 'in' : '' }}">
+                    <li class="{{ request()->is('alltransaction*') ? 'active' : '' }}"><a href="{{ route('alltransaction.index') }}">All Transaction</a></li>
+                    <li class="{{ request()->is('inbox*') ? 'active' : '' }}"><a href="{{ route('inbox.index') }}">Inbox</a></li>
+                    <li><a href="graph_rickshaw.html">Outbox</a></li>
+                </ul>
+            </li>
             
             
+                     
             {{-- <li class="active">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">

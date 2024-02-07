@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class AllTransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user');
+          return view('alltransaction');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,19 +39,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'username' => 'required|unique:tbluser,username',
-            'password' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'usertype' => 'required',
-        ]);
-        
-        $data['password'] = bcrypt($data['password']);
-    
-        $user = User::create($data);
-    
-        return response()->json($user);
+ 
+      
     }
 
     /**
@@ -57,20 +50,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show()
-{
-    $roles = [
-        1 => 'Admin',
-        2 => 'User'
-    ];
-
-    $data = User::all();
-
-    $data->each(function ($user) use ($roles) {
-        $user->usertype = $roles[$user->usertype] ?? 'Unknown';
-    });
-
-    return response()->json(['data' => $data]);
-}
+    {
+        $usersWithTransactions = User::join('tbltransaction', 'tbluser.id', '=', 'tbltransaction.User_ID')
+        ->get();
+    
+        return response()->json(['data' => $usersWithTransactions]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -92,7 +77,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-   
+        //
     }
 
     /**
