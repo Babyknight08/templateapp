@@ -30,6 +30,7 @@ class User extends Authenticatable
 
     protected $attributes = [
         'address' => '',
+        'contactno' => '',
         'division' => '',
         'section' => '',
         'jobtitle' => '',

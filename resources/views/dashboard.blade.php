@@ -29,6 +29,7 @@
         </div>
             <div class="wrapper wrapper-content">
         <div class="row">
+            {{--  --}}
                     <div class="col-lg-3">
                         <div class="ibox ">
                             <div class="ibox-title">
@@ -38,12 +39,13 @@
                                 <h5>Income</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">40 886,200</h1>
+                                <h1 class="no-margins" id="userCount">40 886,200</h1>
                                 <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
                                 <small>Total income</small>
                             </div>
                         </div>
                     </div>
+                    {{--  --}}
                     <div class="col-lg-3">
                         <div class="ibox ">
                             <div class="ibox-title">
@@ -446,14 +448,7 @@
 
                 </div>
                 </div>
-        <div class="footer">
-            <div class="float-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2018
-            </div>
-        </div>
+       @include('includes.footer')
         </div>
         <div id="right-sidebar">
             <div class="sidebar-container">

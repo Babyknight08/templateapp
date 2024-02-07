@@ -5,8 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>INSPINIA | Data Tables</title>
+    <title>EMB Survey</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -20,7 +19,6 @@
 </head>
 
 <body>
-
     <div id="wrapper">
 
     @include('includes.sidebar')
@@ -87,7 +85,7 @@
         </div>
 
 
-
+        {{-- create modal  --}}
         <div id="createUserModal" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -119,6 +117,94 @@
             </div>
         </div>
 
+        {{-- view modal  --}}
+        <div id="viewUserModal" class="modal fade" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md"><h3 class="m-t-none m-b">User Details</h3>
+                                <form role="form" id="viewUserForm">
+                                @csrf
+                                    <div class="form-group"><label>Username</label> <input type="text" class="form-control" name="viewusername" id="viewusername" readonly></div>
+                                    <div class="form-group"><label>Password</label> <input type="password" class="form-control" name="viewpassword" id="viewpassword" readonly></div>
+                                    <div class="form-group"><label>First Name</label> <input type="text" class="form-control" name="viewfirstname" id="viewfirstname" readonly></div>
+                                    <div class="form-group"><label>Last Name</label> <input type="text" class="form-control" name="viewlastname" id="viewlastname" readonly></div>
+                                    <div class="form-group"><label>Contact Number</label> <input type="text" class="form-control" name="viewcontactno" id="viewcontactno" readonly></div>
+                                    <div class="form-group"><label>Address</label> <input type="text" class="form-control" name="viewaddress" id="viewaddress" readonly></div>
+                                    <div class="form-group"><label>Division</label> <input type="text" class="form-control" name="viewdivision" id="viewdivision" readonly></div>
+                                    <div class="form-group"><label>Section</label> <input type="text" class="form-control" name="viewsection" id="viewsection" readonly></div>
+                                    <div class="form-group"><label>Job Title</label>
+                                        <select class="form-control" name="viewjobtitle" id="viewjobtitle" readonly>
+                                        <option value="">Please Select</option>
+                                        <option value="EMS I">EMS I</option>
+                                        <option value="EMS II">EMS II</option>
+                                        <option value="Engineer III">Engineer III</option>
+                                        <option value="Engineer IV">Engineer IV</option>
+                                    </select></div>
+                                    <div class="form-group">
+                                        <label>User Type</label>
+                                        <select class="form-control" name="viewusertype" id="viewusertype" readonly>
+                                        <option value="2">User</option>
+                                        <option value="1">Admin</option>
+                                    </select>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-white float-right" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+             {{-- view modal  --}}
+             <div id="updateUserModal" class="modal fade" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md"><h3 class="m-t-none m-b">User Details</h3>
+                                    <form role="form" id="updateUserForm">
+                                    @csrf
+                                        <div class="form-group"><label>Username</label> <input type="text" class="form-control" name="updateusername" id="updateusername"></div>
+                                        <div class="form-group"><label>Password</label> <input type="password" class="form-control" name="updatepassword" id="updatepassword"></div>
+                                        <div class="form-group"><label>First Name</label> <input type="text" class="form-control" name="updatefirstname" id="updatefirstname"></div>
+                                        <div class="form-group"><label>Last Name</label> <input type="text" class="form-control" name="updatelastname" id="updatelastname"></div>
+                                        <div class="form-group"><label>Contact Number</label> <input type="text" class="form-control" name="updatecontactno" id="updatecontactno"></div>
+                                        <div class="form-group"><label>Address</label> <input type="text" class="form-control" name="updateaddress" id="updateaddress"></div>
+                                        <div class="form-group"><label>Division</label> <input type="text" class="form-control" name="updatedivision" id="updatedivision"></div>
+                                        <div class="form-group"><label>Section</label> <input type="text" class="form-control" name="updatesection" id="updatesection"></div>
+                                        <div class="form-group"><label>Job Title</label>
+                                            <select class="form-control" name="updatejobtitle" id="updatejobtitle">
+                                            <option value="">Please Select</option>
+                                            <option value="EMS I">EMS I</option>
+                                            <option value="EMS II">EMS II</option>
+                                            <option value="Engineer III">Engineer III</option>
+                                            <option value="Engineer IV">Engineer IV</option>
+                                        </select></div>
+                                        <div class="form-group">
+                                            <label>User Type</label>
+                                            <select class="form-control" name="updateusertype" id="updateusertype">
+                                            <option value="2">User</option>
+                                            <option value="1">Admin</option>
+                                        </select>
+                                        </div>
+                                        <div>
+                                            <button type="button" class="btn btn-white float-right" data-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary float-right mr-1" type="submit"><strong>Update</strong></button>
+                                    </div>
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+
     <!-- Mainly scripts -->
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -147,7 +233,7 @@
                     dataType: "json",
                     dataSrc: "data",
                     data: { 
-                    _token: "{{ csrf_token() }}"  // Add this line to include the CSRF token
+                    _token: "{{ csrf_token() }}" 
                 },
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
@@ -167,8 +253,8 @@
                         render: function (data, type, row, meta) {
                             return `
                                 <div class="text-center">
-                                    <button class="btn btn-success btn-sm viewUser" id="${data}">View</button>
-                                    <button class="btn btn-primary btn-sm updateUser" id="${data}">Edit</button>
+                                    <button data-toggle="modal" data-target="#viewUserModal" class="btn btn-success btn-sm viewUser" id="${data}">View</button>
+                                    <button data-toggle="modal" data-target="#updateUserModal" class="btn btn-primary btn-sm updateUser" id="${data}">Edit</button>
                                     <button class="btn btn-danger btn-sm deleteUser" id="${data}">Delete</button>
                                 </div>`;
                         }
@@ -229,6 +315,130 @@
                     }
                 });
             });
+
+            $(document).on("click", ".viewUser", function () {
+         
+                id = ($(this).attr('id'));
+
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('profile.show') }}",
+                    data: {id:id, _token: '{{ csrf_token()}}'},
+                    dataType: "json",
+                    success: function (response) {
+                        $("#viewusername").val(response.username);
+                        $("#viewpassword").val(response.password);
+                        $("#viewfirstname").val(response.firstname);
+                        $("#viewlastname").val(response.lastname);
+                        $("#viewcontactno").val(response.contactno);
+                        $("#viewaddress").val(response.address);
+                        $("#viewdivision").val(response.division);
+                        $("#viewsection").val(response.section);
+                        $("#viewbirthplace").val(response.birthplace);
+                        $("#viewbirthdate").val(response.birthdate);
+                        $("#viewjobtitle").val(response.jobtitle);
+                        $("#viewusertype").val(response.usertype);
+
+
+                    }
+                });
+            })
+
+            var userId;
+            $(document).on("click", ".updateUser", function () {
+                userId = ($(this).attr('id'));
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('profile.show') }}",
+                    data: {id:userId, _token: '{{ csrf_token()}}'},
+                    dataType: "json",
+                    success: function (response) {
+                        $("#updateusername").val(response.username);
+                        $("#updatepassword").val(response.password);
+                        $("#updatefirstname").val(response.firstname);
+                        $("#updatelastname").val(response.lastname);
+                        $("#updatecontactno").val(response.contactno);
+                        $("#updateaddress").val(response.address);
+                        $("#updatebirthplace").val(response.birthplace);
+                        $("#updatebirthdate").val(response.birthdate);
+                        $("#updatedivision").val(response.division);
+                        $("#updatesection").val(response.section);
+                        $("#updatejobtitle").val(response.jobtitle);
+                        $("#updateusertype").val(response.usertype);
+                    }
+                });
+            })
+
+            $('#updateUserForm').submit(function (e) { 
+                e.preventDefault()
+                var formData = {
+                    id: userId,
+                    username: $("#updateusername").val(),
+                    password: $("#updatepassword").val(),
+                    firstname: $("#updatefirstname").val(),
+                    lastname: $("#updatelastname").val(),
+                    contactno: $("#updatecontactno").val(),
+                    address: $("#updateaddress").val(),
+                    division: $("#updatedivision").val(),
+                    section: $("#updatesection").val(), 
+                    jobtitle: $("#updatejobtitle").val(),
+                    usertype: $("#updateusertype").val(),
+                    _token: "{{ csrf_token() }}"
+                };
+
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('profile.edit') }}",
+                    data: formData,
+                    dataType: "json",
+                    headers: {
+                            'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                        },
+                    success: function (response) {
+                        table.ajax.reload()
+                        swal({
+                            title: "Good Job!",
+                            text: "User Updated Successfully!",
+                            type: "success"
+                        });
+                        $('#updateUserModal').modal('hide')
+                    },
+                    error: function(xhr, status, error){
+                        swal({
+                            title: "Error!",
+                            text: "All fields are required!",
+                            type: "error"
+                        });        
+                    }
+                });
+            });
+
+            $(document).on("click", ".deleteUser", function () {  
+                console.log('trying to delete');
+                swal({
+                            title: "Sample Text?",
+                            text: "Sub Text",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "Yes",
+                            cancelButtonText: "Cancel",
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            closeOnConfirm: false,
+                            closeOnCancel: false,
+                            reverseButtons: true
+                        },
+
+                        function (isConfirm) {
+                        if (isConfirm) {
+                            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        } else {
+                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                        }
+                    });
+                
+            });
+
         });
 
     </script>

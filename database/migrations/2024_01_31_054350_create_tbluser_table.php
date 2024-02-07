@@ -19,10 +19,18 @@ return new class extends Migration
             $table->string('password');
             $table->string('firstname');
             $table->string('lastname');
+<<<<<<< HEAD
             // $table->string('address');
             // $table->string('division');
             // $table->string('section');
             // $table->string('jobtitle');
+=======
+            $table->string('address');
+            $table->string('contactno');
+            $table->string('division');
+            $table->string('section');
+            $table->string('jobtitle');
+>>>>>>> 2da174bee994caea426a4fea2df7eed9dfa161fb
             $table->string('usertype');
             $table->timestamps();
         });

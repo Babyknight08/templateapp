@@ -61,12 +61,12 @@
                             <div class="ibox-content profile-content">
                                 <h4 id="profilename"><strong></strong></h4>
                                 <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
-                                <h5>
+                                {{-- <h5>
                                     About me
                                 </h5>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
-                                </p>
+                                </p> --}}
                                 {{-- <div class="row m-t-lg">
                                     <div class="col-md-4">
                                         <span class="bar">5,3,9,6,5,9,7,3,5,2</span>
@@ -100,7 +100,10 @@
                         <div class="ibox-title">
                             
                    <h5>Profile Details</h5>
-                                              
+                   <div class="ibox-tools">
+                    <button class="btn btn-sm btn-success float-right m-t-n-xs" id="editprofilebtn"><strong>Edit</strong></button>
+               
+                </div>
                         </div>
                         <div class="ibox-content">
 
@@ -113,31 +116,27 @@
                                                 <form role="form" name="profileform" id="profileform">
                                                 @csrf
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label for="username">Username</label> <input type="text" placeholder="Username" class="form-control" name="username" id="username" autocomplete="off"></div>
-                                                        <div class="form-group col-md"><label for="password">Password</label> <input type="text" placeholder="Password" class="form-control" name="password" id="password"></div>
+                                                        <div class="form-group col-md"><label for="username">Username</label> <input type="text" placeholder="Username" class="form-control" name="username" id="username" autocomplete="off" readonly></div>
+                                                        <div class="form-group col-md"><label for="password">Password <span class="text-danger"><i>(Hidden)</i></span></label> <input type="text" placeholder="Password" class="form-control" name="password" id="password" readonly></div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label for="firstname">First Name</label> <input type="text" placeholder="First Name" class="form-control" name="firstname" id="firstname"></div>
-                                                        <div class="form-group col-md"><label for="lastname">Last Name</label> <input type="text" placeholder="Last Name" class="form-control" name="lastname" id="lastname"></div>
+                                                        <div class="form-group col-md"><label for="firstname">First Name</label> <input type="text" placeholder="First Name" class="form-control" name="firstname" id="firstname" readonly></div>
+                                                        <div class="form-group col-md"><label for="lastname">Last Name</label> <input type="text" placeholder="Last Name" class="form-control" name="lastname" id="lastname" readonly></div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label for="contactno">Contact No</label> <input type="number" placeholder="Enter Contact No." class="form-control" name="contactno" id="contactno"></div>
-                                                        <div class="form-group col-md"><label for="address">Address</label> <input type="text" placeholder="Enter Address" class="form-control" name="address" id="address" autocomplete="off"></div>
+                                                        <div class="form-group col-md"><label for="contactno">Contact No</label> <input type="number" placeholder="Enter Contact No." class="form-control" name="contactno" id="contactno" readonly></div>
+                                                        <div class="form-group col-md"><label for="address">Address</label> <input type="text" placeholder="Enter Address" class="form-control" name="address" id="address" autocomplete="off" readonly></div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label for="birthdate">Birth Date</label> <input type="date"  class="form-control" name="birthdate" id="birthdate"></div>
-                                                        <div class="form-group col-md"><label for="birthplace">Birth Place</label> <input type="text" class="form-control" name="birthplace" id="birthplace"></div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md"><label for="division">Division</label><select class="form-control" name="division" id="division">
+                                                        <div class="form-group col-md"><label for="division">Division</label><select class="form-control" name="division" id="division" readonly>
                                                             <option value="">Please Select</option>
-                                                            <option value="Environmental Monitoring Enforcement Division">Environmental Monitoring Enforcement Division</option>
+                                                            <option value="Environmental Monitoring and Enforcement Division">Environmental Monitoring and Enforcement Division</option>
                                                             <option value="Clearance and Permitting Division">Clearance and Permitting Division</option>
-                                                            <option value="Office of the Regional Director">Office of the Regional Director</option>
                                                             <option value="Finance and Administrative Division">Finance and Administrative Division</option>
+                                                            <option value="Office of the Regional Director">Office of the Regional Director</option>
                                                         </select>
                                                         </div>
-                                                        <div class="form-group col-md"><label for="section">Section</label><select class="form-control" name="section" id="section">
+                                                        <div class="form-group col-md"><label for="section">Section</label><select class="form-control" name="section" id="section" readonly>
                                                             <option value="">Please Select</option>
                                                             <option value="PISMU">PISMU</option>
                                                             <option value="EEIU">EEIU</option>
@@ -147,7 +146,7 @@
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label for="jobtitle">Job Title</label><select class="form-control" name="jobtitle" id="jobtitle">
+                                                        <div class="form-group col-md"><label for="jobtitle">Job Title</label><select class="form-control" name="jobtitle" id="jobtitle" readonly>
                                                             <option value="">Please Select</option>
                                                             <option value="EMS I">EMS I</option>
                                                             <option value="EMS II">EMS II</option>
@@ -157,15 +156,8 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="row">
-                                                        <div class="form-group col-md">
-                                                            <label for="aboutme" class="form-label">About Me</label>
-                                                            <textarea class="form-control" rows="3" name="aboutme" id="aboutme"></textarea>
-                                                        </div>
-                                                    </div>
-
                                                     <div>                             
-                                                        <button class="btn btn-sm btn-primary float-right m-t-n-xs" type="submit"><strong>Submit</strong></button>
+                                                        <button class="btn btn-sm btn-primary float-right m-t-n-xs submitbtn" type="submit"><strong>Submit</strong></button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -226,8 +218,8 @@
                     $("#username").val(response.username);
                     $("#firstname").val(response.firstname);
                     $("#lastname").val(response.lastname);
-                    $("#contactno").val(response.contactno);
                     $("#address").val(response.address);
+                    $("#contactno").val(response.contactno);
                     $("#birthdate").val(response.birthdate);
                     $("#birthplace").val(response.birthplace);
                     $("#division").val(response.division);
@@ -247,6 +239,15 @@
                     id: {{ Auth::user()->id }},
                     username: $("#username").val(),
                     password: $("#password").val(),
+                    firstname: $("#firstname").val(),
+                    lastname: $("#lastname").val(),
+                    address: $("#address").val(),
+                    contactno: $("#contactno").val(),
+                    birthdate: $("#birthdate").val(),
+                    birthplace: $("#birthplace").val(),
+                    division: $("#division").val(),
+                    section: $("#section").val(),
+                    jobtitle: $("#jobtitle").val(),
                     _token: "{{ csrf_token() }}"
                 };
 
@@ -256,15 +257,55 @@
                     data: formData,
                     dataType: "json",
                     success: function (response) {
-                    //     swal({
-                    //     title: "Success!",
-                    //     text: "Profile successfully update!",
-                    //     type: "success"
-                    // });
-                        console.log(response);
+                        swal({
+                        title: "Success!",
+                        text: "Profile successfully update!",
+                        type: "success"
+                    });
+                    },
+                    error: function (xhr, status, error) {
+                    swal({
+                        title: "Error!",
+                        text: "All fields are required!",
+                        type: "error"
+                    });
                 }
                 });
             });
+
+            var btnstate = 1;
+            EditState();
+
+            $('#username').on('change', function () {
+                EditState();
+            });
+
+            $('#editprofilebtn').on('click', function () {
+                btnstate = (btnstate === 1) ? 0 : 1;
+                $(document.querySelectorAll('input, select')).trigger('change');
+            });
+
+            function EditState() {
+                if (btnstate === 1) {
+                    $(document.querySelectorAll('input')).prop('readonly', true);
+                     $(document.querySelectorAll('select')).attr('readonly', true);
+                     $(".submitbtn").hide();
+                     $("#editprofilebtn").text("Edit");
+
+                   
+
+                } else {
+                    $(document.querySelectorAll('input')).prop('readonly', false);
+                     $(document.querySelectorAll('select')).removeAttr('readonly');
+                     $(".submitbtn").show();
+                     $("#editprofilebtn").text("Lock");
+
+
+
+                }
+            }
+
+                        
 
         });
     </script>
