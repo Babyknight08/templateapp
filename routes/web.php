@@ -44,3 +44,4 @@ Route::middleware([AuthenticatedMiddleware::class])->group(function () {
 
     // default view
     Route::get('/login', [AuthController::class, 'index'])->name('index');
+    

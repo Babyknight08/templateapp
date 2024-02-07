@@ -98,6 +98,7 @@
                 <div class="col-md-8">
                     <div class="ibox ">
                         <div class="ibox-title">
+                            
                    <h5>Profile Details</h5>
                                               
                         </div>
@@ -255,12 +256,13 @@
                     data: formData,
                     dataType: "json",
                     success: function (response) {
-                        swal({
-                        title: "Success!",
-                        text: "Profile successfully update!",
-                        type: "success"
-                    });
-                    }
+                    //     swal({
+                    //     title: "Success!",
+                    //     text: "Profile successfully update!",
+                    //     type: "success"
+                    // });
+                        console.log(response);
+                }
                 });
             });
 

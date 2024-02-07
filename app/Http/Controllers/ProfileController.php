@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -59,24 +60,28 @@ class ProfileController extends Controller
      */
     public function edit(Request $request)
     {
-        $id = $request->input('id');
-        $username = $request->input('username');
-        $password = $request->input('password');
+        // $id = $request->input('id');
+        // $username = $request->input('username');
+        // $password = $request->input('password');
     
-        $user = User::where('id', $id)->first();
+        // $user = User::where('id', $id)->first();
     
-        if (!empty($password)) {
-            User::where('id', $id)
-                ->update([
-                    'username' => $username,
-                    'password' => bcrypt($password),
-                ]);
-        } else {
-            User::where('id', $id)
-                ->update(['username' => $username]);
-        }
+        // if (!empty($password)) {
+        //     User::where('id', $id)
+        //         ->update([
+        //             'username' => $username,
+        //             'password' => bcrypt($password),
+        //         ]);
+        // } else {
+        //     User::where('id', $id)
+        //         ->update(['username' => $username]);
+        // }
     
-        return response()->json(['message' => 'User updated successfully']);
+        // return response()->json(['message' => 'User updated successfully']);
+
+
+        
+        
     }
 
     /**

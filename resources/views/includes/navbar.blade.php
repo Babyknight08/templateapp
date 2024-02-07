@@ -5,7 +5,7 @@
         <ul class="nav navbar-top-links navbar-right">
             @if(Auth::check())
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome, <b>{{ Auth::user()->firstname }}!</b></span>
+                <span class="m-r-sm text-muted welcome-message">Welcome, <button class="border-0 bg-white" id="confetti"><b>{{ Auth::user()->firstname }}!</b></button></span>
             </li>
         @else
             <li>
@@ -124,3 +124,4 @@
         </ul>
 
     </nav>
+
