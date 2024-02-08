@@ -201,15 +201,17 @@
                             <div class="col-md"><h3 class="m-t-none m-b">Adding User</h3>
                                 <form role="form" id="viewTransactionForm">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="viewsystem">System</label>
-                                    <select class="form-control" name="viewsystem" id="viewsystem" readonly>
-                                    <option value="">-Select-</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                </div>
-                                <div class="form-group">
+                                <div class="form-group"><label for="viewsystem">System</label> <input type="text" class="form-control" name="viewsystem" id="viewsystem" autocomplete="off" readonly></div>
+                                <div class="form-group"><label for="viewsubsystem">Sub-System</label> <input type="text" class="form-control" name="viewsubsystem" id="viewsubsystem" autocomplete="off" readonly></div>
+                                <div class="form-group"><label for="viewsubjectname">Subject Name</label> <input type="text" class="form-control" name="viewsubjectname" id="viewsubjectname" autocomplete="off" readonly></div>
+                                <div class="form-group"><label for="viewdivision">Division</label> <input type="text" class="form-control" name="viewdivision" id="viewdivision" autocomplete="off" readonly></div>
+                                <div class="form-group"><label for="viewsection">Section</label> <input type="text" class="form-control" name="viewsection" id="viewsection" autocomplete="off" readonly></div>
+                                <div class="form-group"><label for="viewsender">Sender</label> <input type="text" class="form-control" name="viewsender" id="viewsender" autocomplete="off" readonly></div>
+                                <div class="form-group"><label for="viewaction">Personnel</label> <input type="text" class="form-control" name="viewpersonnel" id="viewpersonnel" autocomplete="off" readonly></div>
+                                <div class="form-group"><label for="viewaction">Action</label> <input type="text" class="form-control" name="viewaction" id="viewaction" autocomplete="off" readonly></div>
+                                <div class="form-group"><label for="viewremarks">Remarks</label> <input type="text" class="form-control" name="viewremarks" id="viewremarks" autocomplete="off" readonly></div>
+
+                                {{-- <div class="form-group">
                                     <label for="viewsubsystem">Sub-System</label>
                                     <select class="form-control" name="viewsubsystem" id="viewsubsystem" readonly>
                                     <option value="">-Select-</option>
@@ -221,9 +223,9 @@
                                 <div class="form-group">
                                     <label for="viewsubjectname">Subject</label>
                                     <textarea class="form-control" id="viewsubjectname" name="viewsubjectname" rows="3" readonly></textarea>
-                                </div>
+                                </div> --}}
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="viewdivision">Division</label>
                                     <select class="form-control" name="viewdivision" id="viewdivision" readonly>
                                     <option value="">-Select-</option>
@@ -238,9 +240,9 @@
                                     <label for="viewsection">Section</label>
                                     <select class="form-control" name="viewsection" id="viewsection" readonly>
                                 </select>
-                                </div>
+                                </div> --}}
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="viewpersonnel">Personnel</label>
                                     <select class="form-control" name="viewpersonnel" id="viewpersonnel" readonly>
                                 </select>
@@ -259,13 +261,9 @@
                                 <div class="form-group">
                                     <label for="viewremarks">Remarks</label>
                                     <textarea class="form-control" id="viewremarks" name="viewremarks" rows="3" readonly></textarea>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="viewdocuments" name="viewdocuments" readonly>
-                                        <label class="custom-file-label" for="documents">Choose file...</label>
-                                    </div>
                                     <a id="download-file"></a>
                                     <button type="button" id="remove-file" class="btn btn-danger" style="display: none;">Remove file</button>
                                 </div>
@@ -530,16 +528,18 @@
                         'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
                     },
                     success: function (response) {
-                        $('#viewsystem').val(response.System);
-                        $('#viewsubsystem').val(response.SubSystem);
-                        $('#viewsubjectname').val(response.SubjectName);
-                        $('#viewdivision').val(response.Division);
-                        $('#viewaction').val(response.Action);
-                        $('#viewremarks').val(response.Remarks);
+                        $('#viewsystem').val(response.data.System);
+                        $('#viewsubsystem').val(response.data.SubSystem);
+                        $('#viewsubjectname').val(response.data.subjectname);
+                        $('#viewdivision').val(response.data.division);
+                        $('#viewsection').val(response.data.section);
+                        $('#viewaction').val(response.data.action);
+                        $('#viewremarks').val(response.data.remarks);
+                        $('#viewsender').val(response.data.sender);
+                        $('#viewpersonnel').val(response.data.personnel_firstname + ' ' + response.data.personnel_lastname);
 
-
-                        if (response.Documents) {
-                            var fileUrl = response.Documents;
+                        if (response.data.documents) {
+                            var fileUrl = response.data.documents;
                             var fileInfo = $('<a>').attr({
                                 href: fileUrl,
                                 download: 'downloaded_file' 

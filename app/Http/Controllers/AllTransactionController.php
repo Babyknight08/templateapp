@@ -52,11 +52,14 @@ class AllTransactionController extends Controller
     public function show()
     {
         $usersWithTransactions = User::join('tbltransaction', 'tbluser.id', '=', 'tbltransaction.User_ID')
-        ->get();
+            ->join('tbluser as personnel', 'personnel.id', '=', 'tbltransaction.personnel')
+            ->select('tbluser.firstname', 'tbluser.lastname', 'personnel.firstname as personnel_firstname', 'personnel.lastname as personnel_lastname', 'tbltransaction.Transaction_No', 'tbltransaction.System', 'tbltransaction.SubSystem' , 'tbltransaction.SubjectName', 'tbltransaction.Action', 'tbltransaction.created_at')
+            ->get();
     
         return response()->json(['data' => $usersWithTransactions]);
     }
-
+    
+    
     /**
      * Show the form for editing the specified resource.
      *

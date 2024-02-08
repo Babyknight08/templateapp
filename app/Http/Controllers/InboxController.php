@@ -98,12 +98,13 @@ class InboxController extends Controller
     {
         $id = $request->input('id');
         
-        $usersWithTransactions = User::join('tbltransaction', 'tbluser.id', '=', 'tbltransaction.user_id')
+        $showAllInbox = User::join('tbltransaction', 'tbluser.id', '=', 'tbltransaction.user_id')
         ->where('tbltransaction.status', 1)
         ->where('tbltransaction.personnel', $id)
         ->get();
         
-        return response()->json(['data' => $usersWithTransactions]);
+        return response()->json(['data' => $showAllInbox]);
+
     }
     /**
      * Show the form for editing the specified resource.
@@ -140,17 +141,17 @@ class InboxController extends Controller
     }
 
     public function view(Request $request)
-    {
-        $id = $request->input('id');
-    
-        $transaction = Transaction::join('tbluser', 'tbluser.id', '=', 'tbltransaction.user_id')
-            ->where('tbltransaction.id', $id)
-            ->where('tbltransaction.status', 1)
-            ->select('tbltransaction.*')
-            ->first();
+{
+    $id = $request->input('id');
 
-    
-        return response()->json($transaction);
-    }
+    $transaction = Transaction::join('tbluser', 'tbluser.id', '=', 'tbltransaction.user_id')
+        ->join('tbluser as personnel', 'personnel.id', '=', 'tbltransaction.personnel')
+        ->where('tbltransaction.id', $id)
+        ->select('tbltransaction.System', 'tbltransaction.sender', 'tbltransaction.SubSystem','tbluser.address','tbltransaction.subjectname','tbluser.division','tbluser.section','personnel.firstname as personnel_firstname', 'personnel.lastname as personnel_lastname','tbltransaction.action','tbltransaction.remarks','tbltransaction.documents')
+        ->first();
+
+    return response()->json(['data' => $transaction]);
+}
+
     
 }

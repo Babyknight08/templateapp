@@ -97,7 +97,7 @@
                                     <div class="form-group"><label>Username</label> <input type="text" placeholder="Enter Username" class="form-control" name="username" id="username"></div>
                                     <div class="form-group"><label>Password</label> <input type="password" placeholder="Enter Password" class="form-control" name="password" id="password"></div>
                                     <div class="form-group"><label>First Name</label> <input type="text" placeholder="Enter First Name" class="form-control" name="firstname" id="firstname"></div>
-                                    <div class="form-group"><label>Last Name</label> <input type="password" placeholder="Enter Last Name" class="form-control" name="lastname" id="lastname"></div>
+                                    <div class="form-group"><label>Last Name</label> <input type="text" placeholder="Enter Last Name" class="form-control" name="lastname" id="lastname"></div>
                                     <div class="form-group">
                                         <label>User Type</label>
                                         <select class="form-control" name="usertype" id="usertype">

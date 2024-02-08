@@ -52,15 +52,15 @@
                         </div>
                         <div>
                             <div class="ibox-content no-padding border-left-right">
-                                <label for="fileInput">
+                                <label for="ImageProfile">
                                     <img alt="image" class="img-fluid" src="img/profile_big.jpg" id="profileImage">
                                 </label>
-                                <input type="file" id="fileInput" style="display: none;" accept="image/*">
+                                <input type="file" id="ImageProfile" style="display: none;" accept="image/*" name="ImageProfile">
                             </div>
                             
                             <div class="ibox-content profile-content">
                                 <h4 id="profilename"><strong></strong></h4>
-                                <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+                                <p><i class="fa fa-map-marker profile-address" id="profile-address"></i></p>
                                 {{-- <h5>
                                     About me
                                 </h5>
@@ -127,7 +127,7 @@
                                                         <div class="form-group col-md"><label for="address">Address</label> <input type="text" placeholder="Enter Address" class="form-control" name="address" id="address" autocomplete="off" readonly></div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label for="division">Division</label><select class="form-control" name="division" id="division" readonly>
+                                                        <div class="form-group col-md"><label for="division">Division</label><select class="form-control" name="division" id="division">
                                                             <option value="">Please Select</option>
                                                             <option value="Environmental Monitoring and Enforcement Division">Environmental Monitoring and Enforcement Division</option>
                                                             <option value="Clearance and Permitting Division">Clearance and Permitting Division</option>
@@ -135,17 +135,24 @@
                                                             <option value="Office of the Regional Director">Office of the Regional Director</option>
                                                         </select>
                                                         </div>
-                                                        <div class="form-group col-md"><label for="section">Section</label><select class="form-control" name="section" id="section" readonly>
-                                                            <option value="">Please Select</option>
-                                                            <option value="PISMU">PISMU</option>
-                                                            <option value="EEIU">EEIU</option>
-                                                            <option value="Legal">Legal</option>
+                                                        <div class="form-group col-md"><label for="section">Section</label><select class="form-control" name="section" id="section">
+                                                            <option value="Legal Unit">Legal Unit</option>
+                                                                <option value="Planning and Information System Management Unit">Planning and Information System Management Unit</option>
+                                                                <option value="Provincial Environmental Monitoring Unit">Provincial Environmental Monitoring Unit</option>
+                                                                <option value="Ambient Monitoring Section">Ambient Monitoring Section</option>
+                                                                <option value="Chemical and Hazardous Waste Management Section">Chemical and Hazardous Waste Management Section</option>
+                                                                <option value="Water and Air Quality Monitoring Section">Water and Air Quality Monitoring Section</option>
+                                                                <option value="Solid Waste Management Section">Solid Waste Management Section</option>
+                                                                <option value="Air and Water Permitting Section">Air and Water Permitting Section</option>
+                                                                <option value="Environmental Impact Assessment Section">Environmental Impact Assessment Section</option>
+                                                                <option value="Administrative Section">Administrative Section</option>
+                                                                <option value="Finance Section">Finance Section</option>
                                                         </select>
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="form-group col-md"><label for="jobtitle">Job Title</label><select class="form-control" name="jobtitle" id="jobtitle" readonly>
+                                                        <div class="form-group col-md"><label for="jobtitle">Job Title</label><select class="form-control" name="jobtitle" id="jobtitle">
                                                             <option value="">Please Select</option>
                                                             <option value="EMS I">EMS I</option>
                                                             <option value="EMS II">EMS II</option>
@@ -210,7 +217,7 @@
                     _token: "{{ csrf_token() }}"
                 },
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Change "token" to "csrf-token"
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 dataType: "json",
                 success: function (response) {
@@ -225,6 +232,7 @@
                     $("#section").val(response.section);
                     $("#jobtitle").val(response.jobtitle);
                     $("#profilename").text(response.firstname + ' ' + response.lastname);
+                    $("#profile-address").text(response.address);
                 },
                 error: function (xhr, status, error) {
                 
@@ -256,20 +264,28 @@
                     data: formData,
                     dataType: "json",
                     success: function (response) {
+                        // Show success message
                         swal({
-                        title: "Success!",
-                        text: "Profile successfully update!",
-                        type: "success"
-                    });
+                            title: "Success!",
+                            text: "Profile successfully updated!",
+                            type: "success"
+                        },
+                        //  function() {
+                        //     // Reload the page after the user clicks the confirm button
+                        //     location.reload();
+                        // }
+                        );
                     },
                     error: function (xhr, status, error) {
-                    swal({
-                        title: "Error!",
-                        text: "All fields are required!",
-                        type: "error"
-                    });
-                }
+                        // Show error message
+                        swal({
+                            title: "Error!",
+                            text: "All fields are required!",
+                            type: "error"
+                        });
+                    }
                 });
+
             });
 
             var btnstate = 1;
@@ -287,22 +303,17 @@
             function EditState() {
                 if (btnstate === 1) {
                     $(document.querySelectorAll('input')).prop('readonly', true);
-                     $(document.querySelectorAll('select')).attr('readonly', true);
-                     $(".submitbtn").hide();
-                     $("#editprofilebtn").text("Edit");
-
-                   
-
+                    $(document.querySelectorAll('select')).prop('disabled', true);
+                    $(".submitbtn").hide();
+                    $("#editprofilebtn").text("Edit");
                 } else {
                     $(document.querySelectorAll('input')).prop('readonly', false);
-                     $(document.querySelectorAll('select')).removeAttr('readonly');
-                     $(".submitbtn").show();
-                     $("#editprofilebtn").text("Lock");
-
-
+                    $(document.querySelectorAll('select')).prop('disabled', false);
+                    $(".submitbtn").show();
+                    $("#editprofilebtn").text("Lock");
 
                 }
-            }
+            }          
 
                         
 

@@ -36,11 +36,9 @@ Route::middleware([AuthenticatedMiddleware::class])->group(function () {
     Route::post('/showprofile', [ProfileController::class, 'show'])->name('profile.show');
     Route::post('/editprofile', [ProfileController::class, 'edit'])->name('profile.edit');
 
-
     Route::get('/alltransaction', [AllTransactionController::class, 'index'])->name('alltransaction.index');
     Route::post('/alltransactionstore', [AllTransactionController::class, 'store'])->name('alltransaction.store');
     Route::post('/alltransactionshow', [AllTransactionController::class, 'show'])->name('alltransaction.show');
-
 
     Route::get('/inbox', [InboxController::class, 'index'])->name('inbox.index');
     Route::post('/inboxstore', [InboxController::class, 'store'])->name('inbox.store');

@@ -228,10 +228,12 @@
                     { data: 'SubjectName' },
                     { data: function(row) { return row.firstname + ' ' + row.lastname; } },
                     { data: 'Action' },
-
-                    { data: 'Personnel' },
-
-                    {   data: 'created_at',
+                    { 
+                        data: function(row) { 
+                            return row.personnel_firstname + ' ' + row.personnel_lastname; 
+                        } 
+                    },
+                    { data: 'created_at',
                         render: function(data, type, row, meta) {
                             var date = new Date(data);
                             var formattedDate = date.toLocaleDateString('en-US', {

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('Documents');
             $table->string('Remarks');
             $table->string('Status');
-            $table->string('User_ID');
+            $table->foreignId('User_ID')->constrained('tbluser');
             $table->timestamps();
         });
     }
