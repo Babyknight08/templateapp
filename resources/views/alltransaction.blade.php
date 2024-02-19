@@ -40,7 +40,7 @@
                     <h2>All Transaction</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('dashboard') }}">Home</a>
+                            <a href="{{ route('dashboard') }}">Home </a>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="#">Documents</a>
