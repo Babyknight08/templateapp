@@ -37,7 +37,7 @@
                             <a href="{{ route('dashboard') }}">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#">Home</a>
+                            <a href="#">Documents</a>
                         </li>
                         <li class="breadcrumb-item active">
                             <strong>Inbox</strong>
@@ -64,8 +64,8 @@
                         <th>System</th>
                         <th>Sub-System</th>
                         <th>Subject</th>
-                        <th>Action Take</th>
                         <th>Sender</th>
+                        <th>Action Taken</th>
                         <th>DateTime Forwarded</th>
                         <th>Remarks</th>
                     </tr>
@@ -95,7 +95,7 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md"><h3 class="m-t-none m-b">Adding User</h3>
+                            <div class="col-md"><h3 class="m-t-none m-b">Create Transaction</h3>
                                 <form role="form" id="createTransactionForm">
                                 @csrf
                                 <div class="form-group">
@@ -144,7 +144,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Action</label>
+                                    <label for="action">Action</label>
                                     <select class="form-control" name="action" id="action">
                                     <option value="">-Select-</option>
                                     <option value="For Appropriate Action">For Appropriate Action</option>
@@ -157,17 +157,11 @@
                                     <label for="remarks">Remarks</label>
                                     <textarea class="form-control" id="remarks" name="remarks" rows="3"></textarea>
                                 </div>
-                                {{-- <div class="form-group">
-                                    <input id="documents" name="documents" type="file" class="documents">
-                                    <label for="documents" class="custom-file-label">Choose file...</label>
-                                    <p id="file-info"></p>
-                                    <button type="button" id="remove-file" style="display: none;">Remove file</button>
-                                </div>
-                                --}}
+                      
 
                                 <div class="form-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="documents" name="documents">
+                                        <input type="file" class="custom-file-input" id="documents" name="documents" multiple>
                                         <label class="custom-file-label" for="documents">Choose file...</label>
                                     </div>
                                     <p id="file-info"></p>
@@ -175,14 +169,11 @@
                                 </div>
                                 
 
-                                {{-- <div class="form-group">
-                                    <label for="documents">documents</label>
-                                    <textarea class="form-control" id="documents" name="documents" rows="3"></textarea>
-                                </div> --}}
+                      
                                 <div>
                                     <button type="button" class="btn btn-white float-right" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary float-right mr-1" type="submit"><strong>Submit</strong></button>
-                            </div>
+                                    <button class="btn btn-primary float-right mr-1" type="submit"><strong>Submit</strong></button>
+                                </div>
                                 </form>
                             </div>
                     </div>
@@ -209,59 +200,11 @@
                                 <div class="form-group"><label for="viewsender">Sender</label> <input type="text" class="form-control" name="viewsender" id="viewsender" autocomplete="off" readonly></div>
                                 <div class="form-group"><label for="viewaction">Personnel</label> <input type="text" class="form-control" name="viewpersonnel" id="viewpersonnel" autocomplete="off" readonly></div>
                                 <div class="form-group"><label for="viewaction">Action</label> <input type="text" class="form-control" name="viewaction" id="viewaction" autocomplete="off" readonly></div>
-                                <div class="form-group"><label for="viewremarks">Remarks</label> <input type="text" class="form-control" name="viewremarks" id="viewremarks" autocomplete="off" readonly></div>
-
-                                {{-- <div class="form-group">
-                                    <label for="viewsubsystem">Sub-System</label>
-                                    <select class="form-control" name="viewsubsystem" id="viewsubsystem" readonly>
-                                    <option value="">-Select-</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="viewsubjectname">Subject</label>
-                                    <textarea class="form-control" id="viewsubjectname" name="viewsubjectname" rows="3" readonly></textarea>
-                                </div> --}}
-
-                                {{-- <div class="form-group">
-                                    <label for="viewdivision">Division</label>
-                                    <select class="form-control" name="viewdivision" id="viewdivision" readonly>
-                                    <option value="">-Select-</option>
-                                    <option value="Environmental Monitoring and Enforcement Division">Environmental Monitoring and Enforcement Division</option>
-                                    <option value="Clearance and Permitting Division">Clearance and Permitting Division</option>
-                                    <option value="Finance and Administrative Division">Finance and Administrative Division</option>
-                                    <option value="Office of the Regional Director">Office of the Regional Director</option>
-                                </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="viewsection">Section</label>
-                                    <select class="form-control" name="viewsection" id="viewsection" readonly>
-                                </select>
-                                </div> --}}
-
-                                {{-- <div class="form-group">
-                                    <label for="viewpersonnel">Personnel</label>
-                                    <select class="form-control" name="viewpersonnel" id="viewpersonnel" readonly>
-                                </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="viewaction">Action</label>
-                                    <select class="form-control" name="viewaction" id="viewaction" readonly>
-                                    <option value="">-Select-</option>
-                                    <option value="For Appropriate Action">For Appropriate Action</option>
-                                    <option value="For Initial/Signature">For Initial/Signature</option>
-                                    <option value="For Review">For Review</option>
-                                </select>
-                                </div>
-
+                                {{-- <div class="form-group"><label for="viewremarks">Remarks</label> <input type="text" class="form-control" name="viewremarks" id="viewremarks" autocomplete="off" readonly></div> --}}
                                 <div class="form-group">
                                     <label for="viewremarks">Remarks</label>
                                     <textarea class="form-control" id="viewremarks" name="viewremarks" rows="3" readonly></textarea>
-                                </div> --}}
+                                </div>
 
                                 <div class="form-group">
                                     <a id="download-file"></a>
@@ -270,7 +213,7 @@
                                 
                                 <div>
                                     <button type="button" class="btn btn-white float-right" data-dismiss="modal">Close</button>
-                            </div>
+                                </div>
                                 </form>
                             </div>
                     </div>
@@ -279,6 +222,8 @@
             </div>
         </div>
 
+        
+
 
     <!-- Mainly scripts -->
     <script src="js/jquery-3.1.1.min.js"></script>
@@ -286,7 +231,6 @@
     <script src="js/bootstrap.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
     <script src="js/plugins/dataTables/datatables.min.js"></script>
     <script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
 
@@ -322,8 +266,9 @@
                     { data: 'System' },
                     { data: 'SubSystem' },
                     { data: 'SubjectName' },
+                    { data: 'Sender' },
+                    // { data: function(row) { return row.firstname + ' ' + row.lastname; } },
                     { data: 'Action' },
-                    { data: function(row) { return row.firstname + ' ' + row.lastname; } },
                     { 
                         data: 'created_at',
                         render: function(data, type, row, meta) {
@@ -345,10 +290,13 @@
                         render: function (data, type, row, meta) {
                             return `
                                 <div class="text-center">
-                                    <button data-toggle="modal" data-target="#viewTransactionModal" class="btn btn-success btn-sm inboxView" id="${data}">View</button>
-                                    <button data-toggle="modal" data-target="#inboxReceiveModal" class="btn btn-primary btn-sm inboxReceive" id="${data}">Receive</button>
-                                </div>`;
-                                
+                                    <button data-toggle="modal" data-target="#viewTransactionModal" class="btn btn-success btn-sm inboxView" id="${data}" >View</button>  
+                                    <form action="{{ route('receive.index') }}" method="post" style="display: inline;">
+                                        @csrf
+                                        <input type="hidden" name="id" value="${data}">
+                                        <button type="submit" class="btn btn-primary btn-sm inboxReceive">Receive</button>
+                                    </form>                       
+                                </div>`;  
                         }
                     }
                 ],
@@ -356,10 +304,10 @@
                     { width: '6%', targets: 0 },
                     { width: '6%', targets: 1 },
                     { width: '6%', targets: 2 },
-                    { width: '15%', targets: 3 },
-                    { width: '8%', targets: 4 },
+                    { width: '13%', targets: 3 },
+                    { width: '10%', targets: 4 },
                     { width: '8%', targets: 5 },
-                    { width: '8%', targets: 6 },
+                    { width: '10%', targets: 6 },
                     { width: '8%', targets: 7 },
 
                 ],
@@ -385,8 +333,6 @@
                 ]
 
             });
-
-
 
             $('#createTransactionForm').submit(function (e) { 
                 e.preventDefault();
@@ -438,58 +384,6 @@
                 });
             });
 
-
-            $('#createTransactionModal').on('show.bs.modal', function () {
-                var divisionSelect = $('#division');
-                var sectionSelect = $('#section');
-                var personnelSelect = $('#personnel');
-                var id = {{ auth()->user()->id }};
-                
-                function populateSections(selectedDivision) {
-                    sectionSelect.empty().html('<option value="">-Select-</option>'); 
-                    if (selectedDivision === "Office of the Regional Director") {
-                        sectionSelect.append('<option value="Planning and Information System Management Unit">Planning and Information System Management Unit</option><option value="Legal Unit">Legal Unit</option><option value="Environmental Education Information Unit">Environmental Education Information Unit</option>');
-                    } else if (selectedDivision === "Environmental Monitoring and Enforcement Division") {
-                        sectionSelect.append('<option value="Water and Air Quality Monitoring Section">Water and Air Quality Monitoring Section</option><option value="Ambient Water and Air">Ambient Water and Air</option><option value="Toxic Chemical and Hazardous Waste Management Section">Toxic Chemical and Hazardous Waste Management Section</option>');
-                    }
-                }
-
-                divisionSelect.on('change', function() {
-                    var selectedDivision = $(this).val();
-                    populateSections(selectedDivision);
-    
-                    personnelSelect.empty().html('<option value="">-Select-</option>');
-                });
-
-                divisionSelect.trigger('change');
-
-
-                sectionSelect.on('change', function() {
-                    var selectedSection = $(this).val();
-                    $.ajax({
-                        type: "post",
-                        url: "{{ route('inbox.create') }}",
-                        dataType: "json",
-                        data: { id: id, section: selectedSection },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
-                        },
-                        success: function (response) {
-                            personnelSelect.empty().html('<option value="">-Select-</option>');
-                            $.each(response.data, function(index, user) {
-                                var fullName = user.firstname + ' ' + user.lastname;
-                                personnelSelect.append($('<option></option>').attr('value', user.id   ).text(fullName));
-                            });
-                        },
-                        error: function(xhr, status, error){
-                            console.error(error);
-                        }
-                    });
-                });
-
-            }); 
-
-
             function updateFileInfo(file) {
                     if (file) {
                         $('.custom-file-label').text(file.name);
@@ -504,15 +398,22 @@
                     }
                 }
 
-            $('#documents').on('change', function() {
-                var file = this.files[0];
-                updateFileInfo(file);
-            });
+                $('#documents').on('change', function() {
+                    var files = $(this)[0].files;
+                    var fileNames = [];
+                    for (var i = 0; i < files.length; i++) {
+                        fileNames.push(files[i].name);
+                    }
+                    $('#file-info').text('Selected files: ' + fileNames.join(', '));
+                    $('#remove-file').show();
+                });
 
-            $('#remove-file').on('click', function() {
-                $('#documents').val(null);
-                updateFileInfo(null);
-            });
+                $('#remove-file').on('click', function() {
+                    $('#documents').val('');
+                    $('#file-info').text('');
+                    $(this).hide();
+                });
+
 
 
             $(document).on('click', '.inboxView', function (e) { 
@@ -527,7 +428,9 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
                     },
+
                     success: function (response) {
+                        
                         $('#viewsystem').val(response.data.System);
                         $('#viewsubsystem').val(response.data.SubSystem);
                         $('#viewsubjectname').val(response.data.subjectname);
@@ -536,27 +439,102 @@
                         $('#viewaction').val(response.data.action);
                         $('#viewremarks').val(response.data.remarks);
                         $('#viewsender').val(response.data.sender);
-                        $('#viewpersonnel').val(response.data.personnel_firstname + ' ' + response.data.personnel_lastname);
-
+                        $('#viewpersonnel').val(response.data.personnel);
                         if (response.data.documents) {
-                            var fileUrl = response.data.documents;
+                            var url = response.data.documents;
+                            var fileName = url.split('/').pop(); 
                             var fileInfo = $('<a>').attr({
-                                href: fileUrl,
-                                download: 'downloaded_file' 
-                            }).text('Download File');
-
+                                href: url,
+                                download: fileName
+                            }).text(fileName);
 
                             $('#download-file').empty().append(fileInfo);
-                        } else {
-                        
+                        }
+                        else {                
                             $('#download-file').text('No document uploaded');
                         }
+                      
                     },
+
+                    error : function(){
+                  
+                    $("form :input, :input[form]").val('');
+                    $("#download-file").text('');
+
+                    swal({
+                        title: "Error!",
+                        text: "Forbidden!",
+                        type: "error"
+                    });
+                    
+                    }
 
                 });
             });
 
-     
+            $('#division').on('change', function(){
+  
+                if($(this).val() == ""){
+                    $('#section').empty();
+                $('#personnel').empty();
+
+                }
+                else {
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('inbox.division') }}",
+                        data: { division: $(this).val() }, 
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                        },
+                        success: function (response) {
+                            $('#section').empty();
+                            $('#section').append($('<option>', {
+                                value: '',
+                                text: 'N/A'
+                            }));
+                            response.sections.forEach(sectionName => {   
+                                var option = $('<option>');
+                                option.attr('value', sectionName);
+                                option.text(sectionName);
+                                $('#section').append(option);
+                            });
+                        }
+                    });
+                }
+
+            });
+
+            $('#section').on('change', function(){
+            if($(this).val() == ""){
+                $('#personnel').empty();
+            }
+            else {
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('inbox.section') }}",
+                    data: { section: $(this).val() }, 
+                    dataType: "json",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                    },
+                    success: function (response) {
+                        $('#personnel').empty();
+                        $('#personnel').append($('<option>', {
+                            value: '',
+                            text: 'N/A'
+                        }));
+                        response.personnel.forEach(person => {   
+                            var option = $('<option>');
+                            option.attr('value', person.id);
+                            option.text(person.firstname + ' ' + person.lastname);
+                            $('#personnel').append(option);
+                        });
+                    }
+                });
+            }
+        });
 
        });
 

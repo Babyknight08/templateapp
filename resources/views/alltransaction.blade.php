@@ -16,6 +16,14 @@
     <link href="css/style.css" rel="stylesheet">
 
     <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <style>
+        .table td {
+            word-wrap: break-word;
+            max-width: 100px; 
+        }
+        
+    </style>
+    
 </head>
 
 <body>
@@ -25,9 +33,7 @@
 
         <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
-        
-    @include('includes.navbar')
-
+            @include('includes.navbar')
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
@@ -37,7 +43,7 @@
                             <a href="{{ route('dashboard') }}">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#">Home</a>
+                            <a href="#">Documents</a>
                         </li>
                         <li class="breadcrumb-item active">
                             <strong>All Transaction</strong>
@@ -48,39 +54,39 @@
 
                 </div>
             </div>
+
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
-                <div class="ibox ">
-            
-                    <div class="ibox-content">
-                        <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover TransactionTable" id="TransactionTable">
-                    <thead>
-                    <tr>
-                        <th>Transaction No.</th>
-                        <th>System</th>
-                        <th>Sub-System</th>
-                        <th>Subject</th>
-                        <th>Sender</th>
-                        <th>Action Take</th>
-                        <th>Personnel</th>
+                    <div class="ibox ">
+                
+                        <div class="ibox-content">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover TransactionTable" id="TransactionTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Transaction No.</th>
+                                            <th>System</th>
+                                            <th>Sub-System</th>
+                                            <th>Subject</th>
+                                            <th>Sender</th>
+                                            <th>Action Taken</th>
+                                            <th>Personnel</th>
+                                            <th>Remarks</th>
+                                            <th>DateTime Forwarded</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
 
-                        <th>DateTime Forwarded</th>
-                        <th>Remarks</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                                    <tbody>
 
+                                    </tbody>
 
-
-                    </tbody>
-                    </table>
+                                </table>
+                            </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
             </div>
         </div>
         @include('includes.footer')
@@ -89,88 +95,31 @@
         </div>
 
 
-        {{-- create modal  --}}
-        <div id="createTransactionModal" class="modal fade" aria-hidden="true">
+        {{-- view all transaction modal  --}}
+        <div id="viewTransactionModal" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md"><h3 class="m-t-none m-b">Adding User</h3>
-                                <form role="form" id="createTransactionForm">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="system">System</label>
-                                    <select class="form-control" name="system" id="system">
-                                    <option value="Admin">Admin</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="subsystem">Sub-System</label>
-                                    <select class="form-control" name="subsystem" id="subsystem">
-                                    <option value="Admin">Admin</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="subjectname">Subject</label>
-                                    <textarea class="form-control" id="subjectname" name="subjectname" rows="3"></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="division">Division</label>
-                                    <select class="form-control" name="division" id="division">
-                                    <option value="Environmental Monitoring and Enforcement Division">Environmental Monitoring and Enforcement Division</option>
-                                    <option value="Office of the Regional Director">Office of the Regional Director</option>
-                                </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="section">Section</label>
-                                    <select class="form-control" name="section" id="section">
-                                    <option value="Water and Air Quality Monitoring Section">Water and Air Quality Monitoring Section</option>
-                                    <option value="Planning and Information System Management Unit">Planning and Information System Management Unit</option>
-                                </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="personnel">Personnel</label>
-                                    <select class="form-control" name="personnel" id="personnel">
-                                    <option value="Water and Air Quality Monitoring Section">Water and Air Quality Monitoring Section</option>
-                                    <option value="Planning and Information System Management Unit">Planning and Information System Management Unit</option>
-                                </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Action</label>
-                                    <select class="form-control" name="action" id="action">
-                                    <option value="Water and Air Quality Monitoring Section">Water and Air Quality Monitoring Section</option>
-                                    <option value="Planning and Information System Management Unit">Planning and Information System Management Unit</option>
-                                </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="remarks">Remarks</label>
-                                    <textarea class="form-control" id="remarks" name="remarks" rows="3"></textarea>
-                                </div>
-                                {{-- <div class="custom-file">
-                                    <input id="documents" name="documents" type="file" class="custom-file-input">
-                                    <label for="documents" class="custom-file-label">Choose file...</label>
-                                </div> --}}
-    
-                                <div class="form-group">
-                                    <label for="documents">documents</label>
-                                    <textarea class="form-control" id="documents" name="documents" rows="3"></textarea>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn btn-white float-right" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary float-right mr-1" type="submit"><strong>Submit</strong></button>
-                            </div>
+                                <form role="form" id="viewTransactionModal">
+                                    @csrf
+                                    <div class="form-group"><label for="system">System</label> <input type="text" class="form-control system" name="system" id="system" autocomplete="off" readonly></div>
+                                    <div class="form-group"><label for="system">Sub-System</label> <input type="text" class="form-control" name="subsystem" id="subsystem" autocomplete="off" readonly></div>
+                                    <div class="form-group"><label for="system">Subject</label> <input type="text" class="form-control" name="subjectname" id="subjectname" autocomplete="off" readonly></div>
+                                    <div class="form-group"><label for="system">Division</label> <input type="text" class="form-control" name="division" id="division" autocomplete="off" readonly></div>
+                                    <div class="form-group"><label for="system">Section</label> <input type="text" class="form-control" name="section" id="section" autocomplete="off" readonly></div>
+                                    <div class="form-group"><label for="system">Sender</label> <input type="text" class="form-control" name="sender" id="sender" autocomplete="off" readonly></div>
+                                    <div class="form-group"><label for="system">Personnel</label> <input type="text" class="form-control" name="personnel" id="personnel" autocomplete="off" readonly></div>
+                                    <div class="form-group"><label for="system">Action</label> <input type="text" class="form-control" name="action" id="action" autocomplete="off" readonly></div>
+                                    <div class="form-group"><label for="system">Remarks</label> <input type="text" class="form-control" name="remarks" id="remarks" autocomplete="off" readonly></div>
+                                    <div>
+                                        <button type="button" class="btn btn-white float-right" data-dismiss="modal">Close</button>
+                                    </div>
                                 </form>
                             </div>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -209,16 +158,18 @@
                     },
                 },
                 columnDefs: [
-                    { width: '6%', targets: 0 },
-                    { width: '6%', targets: 1 },
-                    { width: '6%', targets: 2 },
-                    { width: '15%', targets: 3 },
-                    { width: '8%', targets: 4 },
-                    { width: '8%', targets: 5 },
-                    { width: '8%', targets: 6 },
-                    { width: '8%', targets: 7 },
-                    { width: '5%', targets: 8 },
+                    { width: '11%', targets: 0, wrap: true },
+                    { width: '11%', targets: 1, wrap: true },
+                    { width: '11%', targets: 2, wrap: true },
+                    { width: '11%', targets: 3, wrap: true },
+                    { width: '11%', targets: 4, wrap: true },
+                    { width: '11%', targets: 5, wrap: true },
+                    { width: '11%', targets: 6, wrap: true },
+                    { width: '11%', targets: 7, wrap: true },
+                    { width: '11%', targets: 8, wrap: true },
+                    { width: '11%', targets: 9, wrap: true }
                 ],
+
                 order: [0, 'desc'],
                 responsive: true,
                 columns: [
@@ -226,13 +177,10 @@
                     { data: 'System' },
                     { data: 'SubSystem' },
                     { data: 'SubjectName' },
-                    { data: function(row) { return row.firstname + ' ' + row.lastname; } },
+                    { data: 'Sender' },
                     { data: 'Action' },
-                    { 
-                        data: function(row) { 
-                            return row.personnel_firstname + ' ' + row.personnel_lastname; 
-                        } 
-                    },
+                    { data: 'Personnel' },
+                    { data: 'Remarks' },
                     { data: 'created_at',
                         render: function(data, type, row, meta) {
                             var date = new Date(data);
@@ -252,9 +200,8 @@
                         render: function (data, type, row, meta) {
                             return `
                             <div class="text-center">
-                                    <button data-toggle="modal" data-target="#viewUserModal" class="btn btn-success btn-sm viewUser" id="${data}">View</button>
-                        </div>
-
+                                    <button data-toggle="modal" data-target="#viewTransactionModal" class="btn btn-success btn-sm viewTransactionModal" id="${data}">View</button>
+                            </div>
                              `
                         }
                     }
@@ -279,9 +226,37 @@
                     }
                     }
                 ]
-
             });
 
+            $(document).on('click', '.viewTransactionModal', function (e) { 
+                id = $(this).attr('id');
+          
+                $.ajax({
+                type: "post",
+                url: "{{ route('alltransaction.view') }}",
+                data:  {id:id},
+                dataType: "json",
+                headers: {
+                        'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                    },
+                success: function (response) {
+                    $('#system').val(response.data.System);
+                    $('#subsystem').val(response.data.SubSystem);
+                    $('#subjectname').val(response.data.subjectname);
+                    $('#division').val(response.data.division);
+                    $('#section').val(response.data.section);
+                    $('#personnel').val(response.data.personnel);
+                    $('#remarks').val(response.data.remarks);
+                    $('#action').val(response.data.action);
+                    $('#sender').val(response.data.sender);
+                    
+               },
+               error: function(status){
+                    console.log(status);
+               }
+            
+            });
+            });
 
 
        });

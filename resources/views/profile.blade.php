@@ -16,7 +16,6 @@
     <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
 </head>
-
 <body>
 
     <div id="wrapper">
@@ -52,45 +51,20 @@
                         </div>
                         <div>
                             <div class="ibox-content no-padding border-left-right">
-                                <label for="ImageProfile">
-                                    <img alt="image" class="img-fluid" src="img/profile_big.jpg" id="profileImage">
-                                </label>
-                                <input type="file" id="ImageProfile" style="display: none;" accept="image/*" name="ImageProfile">
+                                <form action="" method="post" id="imageForm" enctype="multipart/form-data">
+                                    @csrf
+                                    <label for="ProfileImg" style="display: block; width: 100%; height: 100%;">
+                                        <img alt="image" class="img-fluid" id="ProfileImgPreview" style="width: 100%; height: 100%; object-fit: contain;">
+                                    </label>
+                                    <input type="file" id="ProfileImg" style="display: none;" accept="image/*" name="ProfileImg">
+                                </form>
                             </div>
+                            
+                            
                             
                             <div class="ibox-content profile-content">
                                 <h4 id="profilename"><strong></strong></h4>
                                 <p><i class="fa fa-map-marker profile-address" id="profile-address"></i></p>
-                                {{-- <h5>
-                                    About me
-                                </h5>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
-                                </p> --}}
-                                {{-- <div class="row m-t-lg">
-                                    <div class="col-md-4">
-                                        <span class="bar">5,3,9,6,5,9,7,3,5,2</span>
-                                        <h5><strong>169</strong> Posts</h5>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="line">5,3,9,6,5,9,7,3,5,2</span>
-                                        <h5><strong>28</strong> Following</h5>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="bar">5,3,2,-1,-3,-2,2,3,5,2</span>
-                                        <h5><strong>240</strong> Followers</h5>
-                                    </div>
-                                </div>
-                                <div class="user-button">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                     </div>
                 </div>
@@ -135,19 +109,10 @@
                                                             <option value="Office of the Regional Director">Office of the Regional Director</option>
                                                         </select>
                                                         </div>
-                                                        <div class="form-group col-md"><label for="section">Section</label><select class="form-control" name="section" id="section">
-                                                            <option value="Legal Unit">Legal Unit</option>
-                                                                <option value="Planning and Information System Management Unit">Planning and Information System Management Unit</option>
-                                                                <option value="Provincial Environmental Monitoring Unit">Provincial Environmental Monitoring Unit</option>
-                                                                <option value="Ambient Monitoring Section">Ambient Monitoring Section</option>
-                                                                <option value="Chemical and Hazardous Waste Management Section">Chemical and Hazardous Waste Management Section</option>
-                                                                <option value="Water and Air Quality Monitoring Section">Water and Air Quality Monitoring Section</option>
-                                                                <option value="Solid Waste Management Section">Solid Waste Management Section</option>
-                                                                <option value="Air and Water Permitting Section">Air and Water Permitting Section</option>
-                                                                <option value="Environmental Impact Assessment Section">Environmental Impact Assessment Section</option>
-                                                                <option value="Administrative Section">Administrative Section</option>
-                                                                <option value="Finance Section">Finance Section</option>
-                                                        </select>
+                                                        <div class="form-group col-md">
+                                                            <label for="section">Section</label>
+                                                            <select class="form-control" name="section" id="section">
+                                                            </select>
                                                         </div>
                                                     </div>
 
@@ -221,20 +186,194 @@
                 },
                 dataType: "json",
                 success: function (response) {
-                    $("#username").val(response.username);
-                    $("#firstname").val(response.firstname);
-                    $("#lastname").val(response.lastname);
-                    $("#address").val(response.address);
-                    $("#contactno").val(response.contactno);
-                    $("#birthdate").val(response.birthdate);
-                    $("#birthplace").val(response.birthplace);
-                    $("#division").val(response.division);
-                    $("#section").val(response.section);
-                    $("#jobtitle").val(response.jobtitle);
-                    $("#profilename").text(response.firstname + ' ' + response.lastname);
-                    $("#profile-address").text(response.address);
+                    $("#username").val(response.data.username);
+                    $("#firstname").val(response.data.firstname);
+                    $("#lastname").val(response.data.lastname);
+                    $("#address").val(response.data.address);
+                    $("#contactno").val(response.data.contactno);
+                    $("#birthdate").val(response.data.birthdate);
+                    $("#birthplace").val(response.data.birthplace);
+                    $("#division").val(response.data.division);
+                    $("#jobtitle").val(response.data.jobtitle);
+                    $("#profilename").text(response.data.firstname + ' ' + response.data.lastname);
+                    $("#profile-address").text(response.data.address);
+
+
+                    if (response.profileimg && response.profileimg.ProfileImg) {
+                        $("#ProfileImgPreview").attr('src', response.profileimg.ProfileImg);
+                    } else {
+                        $("#ProfileImgPreview").attr('src', '/uploads/defaultprofile/defaultprofile.png');
+                    }
+
+
+
+                    if (response.data.division == "Environmental Monitoring and Enforcement Division") {
+                        console.log('this is emed!');
+                        $('#section').empty(); 
+                        $('#section').append($('<option>', {
+                            value: "Ambient Monitoring Section",
+                            text: "Ambient Monitoring Section"
+                        }));
+                        $('#section').append($('<option>', {
+                            value: "Chemical and Hazardous Waste Management Section",
+                            text: "Chemical and Hazardous Waste Management Section"
+                        }));
+                        $('#section').append($('<option>', {
+                            value: "Solid Waste Management Section",
+                            text: "Solid Waste Management Section"
+                        }));
+                        $('#section').append($('<option>', {
+                            value: "Water and Air Quality Management Section",
+                            text: "Water and Air Quality Management Section"
+                        }));
+                    }
+
+                    if (response.data.division == "Clearance and Permitting Division") {
+                        $('#section').empty(); 
+                        $('#section').append($('<option>', {
+                            value: "Air and Water Permitting Section",
+                            text: "Air and Water Permitting Section"
+                        }));
+                        $('#section').append($('<option>', {
+                            value: "Environmental Impact Assessment Section",
+                            text: "Environmental Impact Assessment Section"
+                        }));
+                        $('#section').append($('<option>', {
+                            value: "Chemical and Hazardous Waste Permiting Section",
+                            text: "Chemical and Hazardous Waste Permiting Section"
+                        }));
+                    }
+
+
+                    if (response.data.division == "Office of the Regional Director") {
+                        $('#section').empty(); 
+                        $('#section').append($('<option>', {
+                            value: "Environmental Education and Information Unit",
+                            text: "Environmental Education and Information Unit"
+                        }));
+                        $('#section').append($('<option>', {
+                            value: "Legal Unit",
+                            text: "Legal Unit"
+                        }));
+                   
+                        $('#section').append($('<option>', {
+                            value: "Office of the Regional Director",
+                            text: "Office of the Regional Director"
+                        }));
+                        $('#section').append($('<option>', {
+                            value: "Planning and Information System Management Unit",
+                            text: "Planning and Information System Management Unit"
+                        }));
+                        $('#section').append($('<option>', {
+                            value: "Provincial Environmental Monitoring Unit",
+                            text: "Provincial Environmental Monitoring Unit"
+                        }));
+                    }
+
+                    if (response.data.division == "Finance and Administrative Division") {
+                        $('#section').empty(); 
+                        $('#section').append($('<option>', {
+                            value: "Administrative Section",
+                            text: "Administrative Section"
+                        }));
+                        $('#section').append($('<option>', {
+                            value: "Finance Section",
+                            text: "Finance Section"
+                        }));
+                    }
+
+                    $("#division").change(function() {
+                        if($(this).val() == "Environmental Monitoring and Enforcement Division"){
+                            $('#section').empty(); 
+                            $('#section').append($('<option>', {
+                                value: "Ambient Monitoring Section",
+                                text: "Ambient Monitoring Section"
+                            }));
+                            $('#section').append($('<option>', {
+                                value: "Chemical and Hazardous Waste Management Section",
+                                text: "Chemical and Hazardous Waste Management Section"
+                            }));
+                            $('#section').append($('<option>', {
+                                value: "Solid Waste Management Section",
+                                text: "Solid Waste Management Section"
+                            }));
+                            $('#section').append($('<option>', {
+                                value: "Water and Air Quality Management Section",
+                                text: "Water and Air Quality Management Section"
+                            }));
+                        }
+                            if($(this).val() == "Clearance and Permitting Division"){
+                                $('#section').empty(); 
+                            $('#section').append($('<option>', {
+                                value: "Air and Water Permitting Section",
+                                text: "Air and Water Permitting Section"
+                            }));
+                            $('#section').append($('<option>', {
+                                value: "Environmental Impact Assessment Section",
+                                text: "Environmental Impact Assessment Section"
+                            }));
+                            $('#section').append($('<option>', {
+                                value: "Chemical and Hazardous Waste Permiting Section",
+                                text: "Chemical and Hazardous Waste Permiting Section"
+                            }));
+                            }
+
+                            if ($(this).val() == "Office of the Regional Director") {
+                                $('#section').empty(); 
+                            $('#section').append($('<option>', {
+                                value: "Environmental Education and Information Unit",
+                                text: "Environmental Education and Information Unit"
+                            }));
+                            $('#section').append($('<option>', {
+                                value: "Legal Unit",
+                                text: "Legal Unit"
+                            }));
+                    
+                            $('#section').append($('<option>', {
+                                value: "Office of the Regional Director",
+                                text: "Office of the Regional Director"
+                            }));
+                            $('#section').append($('<option>', {
+                                value: "Planning and Information System Management Unit",
+                                text: "Planning and Information System Management Unit"
+                            }));
+                            $('#section').append($('<option>', {
+                                value: "Provincial Environmental Monitoring Unit",
+                                text: "Provincial Environmental Monitoring Unit"
+                            }));
+                            }
+
+                            if ($(this).val() == "Finance and Administrative Division") {
+                                $('#section').empty(); 
+                                $('#section').append($('<option>', {
+                                    value: "Administrative Section",
+                                    text: "Administrative Section"
+                                }));
+                                $('#section').append($('<option>', {
+                                    value: "Finance Section",
+                                    text: "Finance Section"
+                                }));
+                            }
+
+                            if ($(this).val() == "") {
+                                $('#section').empty(); 
+                                $('#section').append($('<option>', {
+                                    value: "",
+                                    text: ""
+                                }));
+                            }
+
+
+                        
+                        $("#section").val(response.data.section);
+
+                    });
+
+                $("#section").val(response.data.section);
+
                 },
                 error: function (xhr, status, error) {
+                    
                 
                 }
             });
@@ -264,20 +403,14 @@
                     data: formData,
                     dataType: "json",
                     success: function (response) {
-                        // Show success message
                         swal({
                             title: "Success!",
                             text: "Profile successfully updated!",
                             type: "success"
-                        },
-                        //  function() {
-                        //     // Reload the page after the user clicks the confirm button
-                        //     location.reload();
-                        // }
-                        );
+                        });
                     },
+
                     error: function (xhr, status, error) {
-                        // Show error message
                         swal({
                             title: "Error!",
                             text: "All fields are required!",
@@ -297,7 +430,7 @@
 
             $('#editprofilebtn').on('click', function () {
                 btnstate = (btnstate === 1) ? 0 : 1;
-                $(document.querySelectorAll('input, select')).trigger('change');
+                $('#profileform input, #profileform select').trigger('change');
             });
 
             function EditState() {
@@ -316,6 +449,33 @@
             }          
 
                         
+            $('#ProfileImg').change(function() {
+                var formData = new FormData();
+                formData.append('User_ID', {{ Auth::user()->id }});
+                formData.append('ProfileImg', $(this)[0].files[0]);
+                formData.append('_token', "{{ csrf_token() }}");
+
+                $.ajax({
+                    url: "{{ route('profile.ProfileImg')}}",
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+           
+                        console.log(response); 
+                        $('#ProfileImgPreview').attr('src', response.data.ProfileImg);
+
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        // Handle error
+                    }
+                });
+            });
+
+
+            
 
         });
     </script>

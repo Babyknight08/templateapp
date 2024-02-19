@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,9 @@ class ProfileController extends Controller
     {
         $id = $request->input('id');
         $data = User::where('id', $id)->first();
-        return response()->json($data);
+
+        $profiledata = Profile::where('User_ID', $id)->latest()->first();
+        return response()->json(['data' => $data, 'profileimg' => $profiledata]);
     }
     
     /**
@@ -121,5 +124,53 @@ class ProfileController extends Controller
     {
         //
     }
+    public function ProfileImg(Request $request)
+    {
+        $data = $request->validate([
+            'ProfileImg' => 'required',
+            'User_ID' => 'required|numeric',
+        ]);
+    
+        $user_id = $request->input('User_ID');
+        $profile = Profile::where('User_ID', $user_id)->first();
+    
+        if ($profile) {
+
+            if ($request->hasFile('ProfileImg')) {
+                $file = $request->file('ProfileImg');
+    
+                $folderName = uniqid();
+    
+                $file->move(public_path('uploads/profileimg/' . $folderName), $file->getClientOriginalName());
+    
+                $filePath = '/uploads/profileimg/' . $folderName . '/' . $file->getClientOriginalName();
+    
+                $profile->update(['ProfileImg' => $filePath]);
+    
+                return response()->json(['data' => $profile]);
+            }
+        } else {
+
+            if ($request->hasFile('ProfileImg')) {
+                $file = $request->file('ProfileImg');
+    
+                $folderName = uniqid();
+    
+                $file->move(public_path('uploads/profileimg/' . $folderName), $file->getClientOriginalName());
+    
+                $filePath = '/uploads/profileimg/' . $folderName . '/' . $file->getClientOriginalName();
+    
+                $data['ProfileImg'] = $filePath;
+                $data['User_ID'] = $user_id;
+    
+                $transaction = Profile::create($data);
+    
+                return response()->json(['data' => $transaction]);
+            }
+        }
+
+        return response()->json(['error' => 'No file uploaded or profile picture could not be updated'], 400);
+    }
+    
 
 }

@@ -25,6 +25,7 @@ class Transaction extends Model
         'remarks',
         'Status',
         'User_ID',
+        'OutboxStatus',
 
     ];
 }
